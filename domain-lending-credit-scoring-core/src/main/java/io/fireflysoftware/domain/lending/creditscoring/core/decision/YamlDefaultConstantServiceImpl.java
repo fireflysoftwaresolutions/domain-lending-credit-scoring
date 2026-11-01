@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Keeps rule constants in memory for this decision service.
  * A missing code still returns empty so the ruleset file default is used.
  */
-final class YamlDefaultConstantService implements ConstantService {
+final class YamlDefaultConstantServiceImpl implements ConstantService {
 
     private final ConcurrentHashMap<UUID, ConstantDTO> byId = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, UUID> idByCode = new ConcurrentHashMap<>();

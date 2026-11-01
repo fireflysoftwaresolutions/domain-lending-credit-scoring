@@ -35,14 +35,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class DecisionServiceTest {
 
-    private DecisionService service;
+    private DecisionServiceImpl service;
 
     @BeforeEach
     void setUp() {
-        JaflyRulesEngineAdapter rules = new JaflyRulesEngineAdapter(
+        JaflyRulesEngineAdapterImpl rules = new JaflyRulesEngineAdapterImpl(
                 JaflyRulesConfiguration.createEngine(),
                 "");
-        service = new DecisionService(rules, new SandboxCreditReportAdapter(), "openplatform-journey");
+        service = new DecisionServiceImpl(rules, new SandboxCreditReportAdapterImpl(), "openplatform-journey");
     }
 
     @Test
@@ -57,8 +57,8 @@ class DecisionServiceTest {
 
     @Test
     void missingCreditReportAndMissingScoreRefers() {
-        DecisionService noReport = new DecisionService(
-                new JaflyRulesEngineAdapter(JaflyRulesConfiguration.createEngine(), ""),
+        DecisionServiceImpl noReport = new DecisionServiceImpl(
+                new JaflyRulesEngineAdapterImpl(JaflyRulesConfiguration.createEngine(), ""),
                 partyId -> Mono.empty(),
                 "openplatform-journey");
 
@@ -121,9 +121,9 @@ class DecisionServiceTest {
                   decision: text
                   reasonCodes: text
                 """);
-        DecisionService installed = new DecisionService(
-                new JaflyRulesEngineAdapter(JaflyRulesConfiguration.createEngine(), directory.toString()),
-                new SandboxCreditReportAdapter(),
+        DecisionServiceImpl installed = new DecisionServiceImpl(
+                new JaflyRulesEngineAdapterImpl(JaflyRulesConfiguration.createEngine(), directory.toString()),
+                new SandboxCreditReportAdapterImpl(),
                 "installer");
 
         StepVerifier.create(installed.evaluate(request(Map.of("creditScore", 800, "highRisk", false))))

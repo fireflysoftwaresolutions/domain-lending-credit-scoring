@@ -41,15 +41,15 @@ import java.util.regex.Pattern;
  * Set {@code firefly.decision.rulesets-directory} to a directory of {@code {name}.yaml}
  * files to replace the sample without changing this class.
  */
-@Component
-public class JaflyRulesEngineAdapter implements RulesEnginePort {
+@Component("jaflyRulesEngineAdapter")
+public class JaflyRulesEngineAdapterImpl implements RulesEnginePort {
 
     private static final Pattern RULESET_NAME = Pattern.compile("[A-Za-z0-9][A-Za-z0-9._-]{0,80}");
 
     private final ASTRulesEvaluationEngine engine;
     private final String rulesetsDirectory;
 
-    public JaflyRulesEngineAdapter(
+    public JaflyRulesEngineAdapterImpl(
             ASTRulesEvaluationEngine engine,
             @Value("${firefly.decision.rulesets-directory:}") String rulesetsDirectory) {
         this.engine = engine;
@@ -81,7 +81,7 @@ public class JaflyRulesEngineAdapter implements RulesEnginePort {
             return Files.readString(path);
         }
         String resource = "rulesets/" + fileName;
-        try (InputStream in = JaflyRulesEngineAdapter.class.getClassLoader().getResourceAsStream(resource)) {
+        try (InputStream in = JaflyRulesEngineAdapterImpl.class.getClassLoader().getResourceAsStream(resource)) {
             if (in == null) {
                 throw new IllegalArgumentException("Ruleset not found on the classpath: " + resource);
             }
