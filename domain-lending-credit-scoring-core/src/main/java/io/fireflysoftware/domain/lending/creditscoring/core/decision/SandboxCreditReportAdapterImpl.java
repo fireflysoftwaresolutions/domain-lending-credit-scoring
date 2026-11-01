@@ -33,9 +33,9 @@ import java.util.UUID;
  * {@code domain-data-credit-bureaus} does not expose an HTTP API this service can call,
  * so the sandbox profile does not require that process to be running.
  */
-@Component
+@Component("sandboxCreditReportAdapter")
 @ConditionalOnProperty(prefix = "firefly.decision", name = "credit-report", havingValue = "sandbox", matchIfMissing = true)
-public class SandboxCreditReportAdapter implements CreditReportPort {
+public class SandboxCreditReportAdapterImpl implements CreditReportPort {
 
     /** Illustrative score returned for every party. Below the sample ruleset threshold of 680. */
     public static final int EXAMPLE_CREDIT_SCORE = 640;

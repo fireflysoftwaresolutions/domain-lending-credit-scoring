@@ -39,6 +39,6 @@ public class JaflyRulesConfiguration {
     public static ASTRulesEvaluationEngine createEngine() {
         return new ASTRulesEvaluationEngine(
                 new ASTRulesDSLParser(new DSLParser()),
-                new YamlDefaultConstantService());
+                new YamlDefaultConstantServiceImpl());
     }
 }

@@ -28,14 +28,14 @@ import java.util.Map;
  * Decision service for every journey. It assembles facts and asks {@link RulesEnginePort}
  * to evaluate the configured ruleset. Score thresholds are not decided here.
  */
-@Service
-public class DecisionService implements DecisionPort {
+@Service("decisionService")
+public class DecisionServiceImpl implements DecisionPort {
 
     private final RulesEnginePort rulesEnginePort;
     private final CreditReportPort creditReportPort;
     private final String rulesetName;
 
-    public DecisionService(
+    public DecisionServiceImpl(
             RulesEnginePort rulesEnginePort,
             CreditReportPort creditReportPort,
             @Value("${firefly.decision.ruleset:openplatform-journey}") String rulesetName) {
